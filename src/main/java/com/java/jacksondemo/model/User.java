@@ -10,9 +10,12 @@ public class User {
 
     private Integer age;
 
-    private User(String firstName, Integer age) {
+    private String ssn;
+
+    private User(String firstName, Integer age, String ssn) {
         this.firstName = firstName;
         this.age = age;
+        this.ssn = ssn;
     }
 
     public Integer getAge() {
@@ -23,12 +26,18 @@ public class User {
         return firstName;
     }
 
+    public String getSsn() {
+        return ssn;
+    }
+
     @JsonPOJOBuilder(withPrefix = "")
     public static class UserBuilder {
 
         private String firstName;
 
         private Integer age;
+
+        private String ssn;
 
         public UserBuilder firstName(String firstName) {
             this.firstName = firstName;
@@ -40,8 +49,13 @@ public class User {
             return this;
         }
 
+        public UserBuilder ssn(String ssn) {
+            this.ssn = ssn;
+            return this;
+        }
+
         public User build() {
-            return new User(firstName, age);
+            return new User(firstName, age, ssn);
         }
     }
 }
